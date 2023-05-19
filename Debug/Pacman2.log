@@ -1,7 +1,9 @@
-﻿  Game.cpp
+﻿  Board.cpp
+  Game.cpp
 C:\Users\gonet\source\repos\Pacman2\Game.cpp(52,51): warning C4390: ';': empty controlled statement found; is this the intent?
   GameManager.cpp
-  main.cpp
+C:\Users\gonet\source\repos\Pacman2\GameManager.cpp(40,37): error C2660: 'GameManager::runGame': function does not take 2 arguments
+C:\Users\gonet\source\repos\Pacman2\GameManager.h(17,7): message : see declaration of 'GameManager::runGame'
   Pacman.cpp
+  main.cpp
   Generating Code...
-  Pacman2.vcxproj -> C:\Users\gonet\source\repos\Pacman2\Debug\Pacman2.exe

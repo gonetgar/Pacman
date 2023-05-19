@@ -120,5 +120,3 @@ void Board::printBoard(int* total_breadcrumbs)
 		cout << endl;
 	}
 }
-
-

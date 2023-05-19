@@ -5,7 +5,7 @@ void GameManager::printMenu()
 	int choice;
 	char level_choice, screen_letter = 'a';
 	string file_name = "pacman_a.screen.txt";
-
+	
 	do {
 		cout << "(1) Start a new game" << endl;
 		cout << "(2) Start a new game with specific screen" << endl;
