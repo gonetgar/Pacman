@@ -88,7 +88,7 @@ void Board::printBoard(int* total_breadcrumbs)
 					cout << ' ';
 					break;
 				}
-				case(BREADCRUMB): 
+				case(BREADCRUMB): // '.'
 				{
 					(*total_breadcrumbs)++;
 					cout << '.';
@@ -102,7 +102,7 @@ void Board::printBoard(int* total_breadcrumbs)
 				}
 				case(PACMAN_BOARD): // '@'		
 				{
-					cout << PACMAN_PRINT;
+					cout << (char)PACMAN_PRINT;
 					break;
 				}
 				//case(GHOST_BOARD): // '$'

@@ -1,9 +1,29 @@
 #include "GameManager.h"
 
+// c'tor
+GameManager::GameManager()
+{
+	pacman_game = nullptr;
+	lives_manager = 3;
+
+	string file_name = "pacman_a.screen.txt";
+	for (int i = 0; i < 3; i++)
+	{
+		screens.push_back(file_name);
+		file_name[7]++;
+	}
+}
+
+//void GameManager::initGame()
+//{
+//	lives_manager = 3;
+//}
+
 void GameManager::printMenu()
 {
 	int choice;
-	char level_choice, screen_letter = 'a';
+	char level_choice, screen_letter = FIRST_SCREEN;
+	char screen_choice;
 	string file_name = "pacman_a.screen.txt";
 	
 	do {
@@ -21,27 +41,23 @@ void GameManager::printMenu()
 			
 			if(choice == STARTGAMEWITHBOARDS) // choose screen and play one game
 			{
-				cout << "Choose a file: (a, b, or c)" << endl;
-				cin >> screen_letter;
-				file_name[7] = screen_letter;
-				runGame(file_name, level_choice, 3);
+				//initGame();
+				this->lives_manager = 3;
+				cout << "Choose a file: \n a\n b\n c" << endl;
+				cin >> screen_choice;
+				screen_choice = screen_choice - 'a' + 1;
+				runGame(screens[screen_choice - 1], level_choice);
+				
 			}
 			else // STARTGAME - start at file 'a' and then proceed to the next games
 			{
-				while (screen_letter >= 'a' && screen_letter <= 'c')
+				//initGame();
+				this->lives_manager = 3;
+				vector<string>::iterator it = screens.begin();
+				while ((it != screens.end()) && (lives_manager > 0))
 				{
-					int previous_lives;
-					// TODO think about the lives. maybe static?
-					if (screen_letter == 'a') // the first game
-						previous_lives = 3;
-					else
-
-
-					runGame(file_name, level_choice);
-
-					// move to the next screen
-					screen_letter++;
-					file_name[7] = screen_letter;
+					runGame(*it, level_choice);
+					++it;
 				}
 			}
 		}
@@ -82,7 +98,7 @@ void GameManager::printInstructions()
 }
 
 // opens the board file and initiate the game
-void GameManager::runGame(string& file_name, int level_choice, int current_lives)
+void GameManager::runGame(string& file_name, int level_choice)
 {
 	ifstream board_game(file_name);
 
@@ -90,8 +106,8 @@ void GameManager::runGame(string& file_name, int level_choice, int current_lives
 		cout << "Error, file couldn't be opened." << endl << endl;
 	else
 	{
-		pacman_game = new Game(board_game, level_choice, current_lives);
-		pacman_game->startGame(); // enjoy :)
+		pacman_game = new Game(board_game, level_choice, this->lives_manager);
+		this->lives_manager = pacman_game->startGame(); // enjoy :)
 		delete pacman_game;
 	}
 

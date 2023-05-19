@@ -11,8 +11,12 @@ Pacman::Pacman()
 
 void Pacman::placePacmanAtStartPosition()
 {
-	current_position.setRow(9);
-	current_position.setCol(39);
+	current_position.setRow(6);
+	current_position.setCol(9);
+
+	// TODO -> LATER CHANGE TO THIS:
+	//current_position.setRow(9);
+	//current_position.setCol(39);
 }
 
 // controlls the movement of pacman

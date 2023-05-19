@@ -10,8 +10,6 @@ using namespace std;
 
 // TODO - check d'tors
 // TODO - ESC problem
-// hellloooo
-// lallala
 
 int main()
 {

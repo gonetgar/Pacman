@@ -1,3 +1,5 @@
+// This class controls the current game played at the time.
+
 #ifndef GAME 
 #define GAME
 
@@ -20,7 +22,9 @@ class Game
 	Pacman player;
 	vector<Ghost> ghostArray;
 	vector<Fruit> fruitArray;
+
 public:
+
 	Game(ifstream& board_file, int chosen_level, int current_lives);
 	int getNumOfBreadcrumbs() { return total_breadcrumbs; }
 	int getNumOfGhosts() { return num_of_ghosts; }
@@ -29,7 +33,7 @@ public:
 	vector<Ghost>& getGhostsArray() { return ghostArray; }
 	vector<Fruit>& getFruitsArray() { return fruitArray; }
 
-	void startGame();
+	int startGame();
 	void gameCourse();
 	void handleCollision(char* pressed_key);
 	bool checkCollision();
@@ -38,9 +42,7 @@ public:
 	bool isGameEnded();
 	void placeGhostsAtStartPosition();
 	void createGhosts();
-
 	
-
 	~Game()
 	{
 		ghostArray.clear();

@@ -8,8 +8,11 @@ using namespace std;
 #include <process.h>
 
 enum {
-	BOARD_WIDTH = 80,
-	BOARD_HEIGHT = 24,
+	BOARD_WIDTH = 20, // TODO -> CHANGE LATER TO 80
+	BOARD_HEIGHT = 10, // TODO -> CHANGE LATER TO 24
+	FIRST_SCREEN = 'a',
+	SECOND_SCREEN = 'b',
+	THIRD_SCREEN = 'c',
 	EMPTY_CELL_BOARD = '%',
 	PACMAN_BOARD = '@',
 	GHOST_BOARD = '$',
@@ -21,6 +24,10 @@ enum {
 	INSTRUCTIONS = 8,
 	STARTGAME = 1,
 	STARTGAMEWITHBOARDS = 2,
+	PAUSE = 1,
+	BEST = 'a',
+	GOOD = 'b',
+	NOVICE = 'c',
 	ESC = 27,
 	DEFAULT = 1,
 	GHOSTSNUM = 2,
