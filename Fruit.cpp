@@ -17,15 +17,13 @@ Fruit::Fruit(Board& game_board)      // default c'tor
     }
 
     /// set starting position at
-    this->current_position.setRow(newRow);
-    this->current_position.setCol(newCol);
+    this->setCurrentPosition(newRow, newCol);
 }
 
 
 void Fruit::printFruit()   /// print fruit
 {
-
-    gotoxy(this->current_position.getCol(), this->current_position.getRow());
+    gotoxy(this->getCurrentPosition().getCol(), this->getCurrentPosition().getRow());
     switch (this->val)
     {
     case 5:
@@ -58,8 +56,8 @@ void Fruit::fruitMovement(Board& game_board, vector<Fruit>& other_array, int num
     while (moved == 0)
     {
         int moveDir = (rand() % (4)) + 1;
-        int curRow = this->current_position.getRow();
-        int curCol = this->current_position.getCol();
+        int curRow = this->getCurrentPosition().getRow();
+        int curCol = this->getCurrentPosition().getCol();
 
         switch (moveDir)
         {
@@ -77,7 +75,6 @@ void Fruit::fruitMovement(Board& game_board, vector<Fruit>& other_array, int num
             break;
         }
     }
-
 }
 
 void Fruit::move(Board& game_board, vector<Fruit>& other_array, int num_fruits, int new_row, int new_col, int* moved)     /// the actual movement

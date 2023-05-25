@@ -8,16 +8,16 @@ using namespace std;
 #include <process.h>
 
 enum {
-	BOARD_WIDTH = 20, // TODO -> CHANGE LATER TO 80
-	BOARD_HEIGHT = 10, // TODO -> CHANGE LATER TO 24
+	BOARD_WIDTH = 80, // TODO -> TEST = 20 . GAME = 80
+	BOARD_HEIGHT = 24, // TODO -> TEST = 10 . GAME = 24
 	FIRST_SCREEN = 'a',
 	SECOND_SCREEN = 'b',
 	THIRD_SCREEN = 'c',
-	EMPTY_CELL_BOARD = '%',
-	PACMAN_BOARD = '@',
-	GHOST_BOARD = '$',
+	EMPTY_CELL_BOARD = (char)'%',
+	PACMAN_BOARD = (char)'@',
+	GHOST_BOARD = (char)'$',
 	EATEN = ' ',
-	WALLS_BOARD = '#',
+	WALLS_BOARD = (char)'#',
 	PACMAN_PRINT = (char)2, // ☻
 	GHOST_PRINT = (char)5, // ♣
 	EXIT_GAME = 9,
@@ -36,11 +36,11 @@ enum {
 	UP = 'w',
 	DOWN = 'x',
 	STAY = 's',
-	WALL = '#',
-	GHOST_WALL = '-',
-	SIDE_TUNNEL = '|',
-	UP_DOWN_TUNNEL = '_',
-	BREADCRUMB = '.',
+	WALL = (char)'#',
+	GHOST_WALL = (char)'-',
+	SIDE_TUNNEL = (char)'|',
+	UP_DOWN_TUNNEL = (char)'_',
+	BREADCRUMB = (char)'.',
 	GHOST_UP = 1,
 	GHOST_DOWN = 2,
 	GHOST_RIGHT = 3,

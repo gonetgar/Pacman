@@ -14,11 +14,6 @@ GameManager::GameManager()
 	}
 }
 
-//void GameManager::initGame()
-//{
-//	lives_manager = 3;
-//}
-
 void GameManager::printMenu()
 {
 	int choice;
@@ -45,6 +40,7 @@ void GameManager::printMenu()
 				this->lives_manager = 3;
 				cout << "Choose a file: \n a\n b\n c" << endl;
 				cin >> screen_choice;
+				screen_choice = (char)tolower(screen_choice);
 				screen_choice = screen_choice - 'a' + 1;
 				runGame(screens[screen_choice - 1], level_choice);
 				

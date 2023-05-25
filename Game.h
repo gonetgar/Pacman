@@ -42,6 +42,7 @@ public:
 	bool isGameEnded();
 	void placeGhostsAtStartPosition();
 	void createGhosts();
+	void placePacmanAtStartPosition();
 	
 	~Game()
 	{

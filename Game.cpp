@@ -3,13 +3,13 @@
 // c'tor
 Game::Game(ifstream& board_file, int chosen_level, int current_lives)
 {
-	total_breadcrumbs = 0;
-	num_of_ghosts = 1; // TODO -> CHANGE LATER TO 4
-	level = chosen_level;
-	game_pause = true;
-	player.setLife(current_lives);
-	board.createBoard(board_file);
-	createGhosts();
+	this->total_breadcrumbs = 0;
+	this->num_of_fruits = 1; // TODO -> CHANGE LATER TO whatever
+	this->num_of_ghosts = 1; // TODO -> CHANGE LATER TO whatever
+	this->level = chosen_level;
+	this->game_pause = true;
+	this->player.setLife(current_lives);
+	this->board.createBoard(board_file); // saves pacman position
 	
 	system("cls");	// clear screen
 }
@@ -17,13 +17,16 @@ Game::Game(ifstream& board_file, int chosen_level, int current_lives)
 // returns the lives of the player in the end of the specific game
 int Game::startGame()
 {
-	// print all entities in their starting locations
-	board.printBoard(&total_breadcrumbs);
-	printScoreAndLife();
-	player.printPacman();
-
-	for (int i = 0; i < num_of_ghosts; i++)
+	// print board and all entities in their starting locations (get from file)
+	board.printBoardAndSaveCreaturesPositions(&total_breadcrumbs);
+	this->placePacmanAtStartPosition();
+	createGhosts();
+	
+	for (int i = 0; i < ghostArray.size(); i++)
 		ghostArray[i].printGhost();
+
+	printScoreAndLife();
+
 
 	// start the game :-)
 	this->gameCourse();
@@ -116,20 +119,19 @@ void Game::gameCourse()
 							handleCollision(&pressed_key);
 					}
 				}
-				else if ((turn % 20) >= 1 || (turn % 20) <= 5)        //// take the previous movement
+				else if ((turn % 20) >= 1 || (turn % 20) <= 5) // take the previous movement
 				{
 					for (int i = 0; i < num_of_ghosts; i++)
 					{
-						ghostArray[i].moveNR(this->board, ghostArray, num_of_ghosts, ghostArray[i].getLastDir()); /// need also to add to ghosts int of last move, and check for colission if stays.
+						ghostArray[i].moveNR(this->board, ghostArray, num_of_ghosts, ghostArray[i].getLastDir());
 						if (checkCollision() == true)
 							handleCollision(&pressed_key);
 					}
 				}
-
 				else
 				{
 					for (int i = 0; i < num_of_ghosts; i++) {
-						ghostArray[i].moveBest(this->board, ghostArray, num_of_ghosts, player.getCurrentPosition());     /////check if the getters ok
+						ghostArray[i].moveBest(this->board, ghostArray, num_of_ghosts, player.getCurrentPosition());
 						if (checkCollision() == true)
 							handleCollision(&pressed_key);
 					}
@@ -150,25 +152,26 @@ void Game::gameCourse()
 
 			//Sleep(100);
 
-			if (turn == 1)
-			{
-				this->board.setCellItem(1, 2, '.');
-				
-				// TODO -> CHANGE LATER TO THIS:
-				/*this->board.setCellItem(3, 3, '.');
-				this->board.setCellItem(3, 76, '.');
-				this->board.setCellItem(18, 3, '.');
-				this->board.setCellItem(18, 76, '.');*/
-			}
+			//if (turn == 1)
+			//{
+			//	this->board.setCellItem(1, 2, '.');
+			//	
+			//	// TODO -> CHANGE LATER TO THIS:
+			//	/*this->board.setCellItem(3, 3, '.');
+			//	this->board.setCellItem(3, 76, '.');
+			//	this->board.setCellItem(18, 3, '.');
+			//	this->board.setCellItem(18, 76, '.');*/
+			//}
 
 			if (turn % 5 == 0)  // fruits move every 5 turns
 			{
-				for (int i = 0; i < this->num_of_fruits; i++)
+				// todo - > bring back later
+				/*for (int i = 0; i < this->num_of_fruits; i++)
 				{
 					fruitArray[i].fruitMovement(this->board, fruitArray, this->num_of_fruits);
 					if (checkCollision() == true)
 						handleCollision(&pressed_key);
-				}
+				}*/
 			}
 
 			if (pressed_key != 's')
@@ -252,8 +255,9 @@ void Game::handleCollision(char* pressed_key) // between pacman and ghost
 	for (int i = 0; i < num_of_ghosts; i++)
 		ghostArray[i].printGhost();
 
-	player.placePacmanAtStartPosition();
-	player.printPacman();
+	//player.placePacmanAtStartPosition();
+	this->placePacmanAtStartPosition();
+	//player.printPacman();
 	player.setLife(player.getALife() - 1);
 	printScoreAndLife();
 	*pressed_key = PAUSE; // pause the game until player press another key
@@ -302,23 +306,32 @@ bool Game::isGameEnded()
 // place ghosts at the start of each game
 void Game::placeGhostsAtStartPosition()
 {
-	ghostArray[0].setCurrentPosition(1, 2);
+	vector<Position> ghosts_pos = this->board.getghostsPositions();
 
-
-	// TODO-> CHANGE LATER TO THIS:
-	/*ghostArray[0].setCurrentPosition(3, 3);
-	ghostArray[1].setCurrentPosition(3, 76);
-	ghostArray[2].setCurrentPosition(18, 3);
-	ghostArray[3].setCurrentPosition(18, 76);*/
+	for (int i = 0; i < this->num_of_ghosts; i++)
+	{
+		ghostArray[i].setCurrentPosition(ghosts_pos[i]);
+	}
 }
 
 // create the ghosts objects and place them at the initial place on board
 void Game::createGhosts()
 {
-	for (int i = 0; i < num_of_ghosts; i++)
+	this->num_of_ghosts = board.getghostsPositions().size();
+
+	for (int i = 0; i < this->num_of_ghosts; i++)
 	{
-		Ghost new_ghost;
-		ghostArray.push_back(new_ghost);
+		int row = board.getghostsPositions()[i].getRow();
+		int col = board.getghostsPositions()[i].getCol();
+		ghostArray.push_back(Ghost(row, col));
 	}
-	placeGhostsAtStartPosition();
+}
+
+void Game::placePacmanAtStartPosition()
+{
+	player.setCurrentPosition(board.getPacmanPosition());
+
+	// todo -> check if necessary
+	gotoxy(player.getCurrentPosition().getCol(), player.getCurrentPosition().getRow());
+	cout << (char)PACMAN_PRINT;
 }

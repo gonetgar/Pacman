@@ -13,7 +13,6 @@ using namespace std;
 class GameManager
 {
 	Game* pacman_game;
-	//Pacman* player_manager;
 	int lives_manager;
 	vector<string> screens;
 
@@ -24,7 +23,6 @@ public:
 	int getLivesManager() { return lives_manager; }
 	void setLivesManager(int new_life) { lives_manager = new_life; }
 
-	//void initGame();
 	void printMenu();
 	void printInstructions();
 	void runGame(string& file_name, int level_choice);

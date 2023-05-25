@@ -1,2 +1,4 @@
-﻿  GameManager.cpp
+﻿  Ghost.cpp
+C:\Users\gonet\source\repos\Pacman2\Ghost.cpp(87,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\gonet\source\repos\Pacman2\Ghost.cpp(365): warning C4172: returning address of local variable or temporary: next_pos
   Pacman2.vcxproj -> C:\Users\gonet\source\repos\Pacman2\Debug\Pacman2.exe
