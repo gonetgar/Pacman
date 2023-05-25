@@ -14,6 +14,7 @@ class GameManager
 {
 	Game* pacman_game;
 	int lives_manager;
+	int total_score;
 	vector<string> screens;
 
 public:
@@ -26,6 +27,8 @@ public:
 	void printMenu();
 	void printInstructions();
 	void runGame(string& file_name, int level_choice);
+
+	~GameManager() { screens.clear(); }
 
 };
 

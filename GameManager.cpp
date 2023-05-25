@@ -5,6 +5,7 @@ GameManager::GameManager()
 {
 	pacman_game = nullptr;
 	lives_manager = 3;
+	total_score = 0;
 
 	string file_name = "pacman_a.screen.txt";
 	for (int i = 0; i < 3; i++)
@@ -47,7 +48,6 @@ void GameManager::printMenu()
 			}
 			else // STARTGAME - start at file 'a' and then proceed to the next games
 			{
-				//initGame();
 				this->lives_manager = 3;
 				vector<string>::iterator it = screens.begin();
 				while ((it != screens.end()) && (lives_manager > 0))
@@ -103,7 +103,7 @@ void GameManager::runGame(string& file_name, int level_choice)
 	else
 	{
 		pacman_game = new Game(board_game, level_choice, this->lives_manager);
-		this->lives_manager = pacman_game->startGame(); // enjoy :)
+		this->lives_manager = pacman_game->startGame(&total_score); // enjoy :)
 		delete pacman_game;
 	}
 

@@ -17,7 +17,6 @@ class Board
 
 public:
 	Board() {}
-	//Board(string& file_name);
 	void createBoard(ifstream& board_file);
 	char getCellItem(int row, int col) { return board[row][col]; }
 	void setCellItem(int row, int col, char item) { board[row][col] = item; }

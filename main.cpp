@@ -8,11 +8,9 @@ aka - G M inc.
 using namespace std;
 #include "GameManager.h"
 
-// TODO - check d'tors
-// TODO - ESC problem
-
 int main()
 {
+	srand(time(NULL));
 	GameManager game;
 	game.printMenu();
 	return 0;

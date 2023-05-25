@@ -5,8 +5,9 @@
 
 #include "Position.h"
 
-class Creature // make it abstract class
+class Creature
 {
+protected:
 	Position current_position;
 	Position prev_pos;
 

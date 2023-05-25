@@ -3,21 +3,10 @@
 Pacman::Pacman()
 {
 	// set starting position:
-	//placePacmanAtStartPosition(); // TODO - check if still necessary
 	direction = 's'; // set default direction to "stay"
 	score = 0;
 	lives = 3;
 }
-
-//void Pacman::placePacmanAtStartPosition()
-//{
-//	current_position.setRow(6);
-//	current_position.setCol(9);
-//
-//	// TODO -> LATER CHANGE TO THIS:
-//	//current_position.setRow(9);
-//	//current_position.setCol(39);
-//}
 
 // controlls the movement of pacman
 void Pacman::pacmanMovement(Board& game_board, char pressed_key)
@@ -112,9 +101,3 @@ void Pacman::crossRegularPath(Board& game_board, int curr_row, int curr_col, int
 		this->score++;
 	}
 }
-
-//void Pacman::printPacman()
-//{
-//	gotoxy(this->current_position.getCol(), this->current_position.getRow());
-//	cout << (char)PACMAN_PRINT;
-//}

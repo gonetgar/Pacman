@@ -1,4 +1,4 @@
-﻿  Ghost.cpp
-C:\Users\gonet\source\repos\Pacman2\Ghost.cpp(87,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\gonet\source\repos\Pacman2\Ghost.cpp(365): warning C4172: returning address of local variable or temporary: next_pos
+﻿  Game.cpp
+C:\Users\gonet\source\repos\Pacman2\Game.cpp(27,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\gonet\source\repos\Pacman2\Game.cpp(58,51): warning C4390: ';': empty controlled statement found; is this the intent?
   Pacman2.vcxproj -> C:\Users\gonet\source\repos\Pacman2\Debug\Pacman2.exe

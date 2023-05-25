@@ -2,7 +2,7 @@
 
 Fruit::Fruit(Board& game_board)      // default c'tor
 {
-    srand(time(NULL));
+    //srand(time(NULL));
     int newVal, newRow, newCol, goodPos = 0;
 
     newVal = (rand() % (4)) + 5;     //// 5-9
@@ -17,17 +17,18 @@ Fruit::Fruit(Board& game_board)      // default c'tor
     }
 
     /// set starting position at
-    this->setCurrentPosition(newRow, newCol);
+    this->current_position.setRow(newRow);
+    this->current_position.setCol(newCol);
 }
 
 
 void Fruit::printFruit()   /// print fruit
 {
-    gotoxy(this->getCurrentPosition().getCol(), this->getCurrentPosition().getRow());
+    gotoxy(this->current_position.getCol(), this->current_position.getRow());
     switch (this->val)
     {
     case 5:
-        cout << 'S';     //// maybe do one in oprations.
+        cout << 'S';
         break;
     case 6:
         cout << 'B';
@@ -47,17 +48,16 @@ void Fruit::printFruit()   /// print fruit
 }
 
 // places the ghost at random place on the board
-///////////////
 void Fruit::fruitMovement(Board& game_board, vector<Fruit>& other_array, int num_fruits)   ///random movement
 {
-    srand(time(NULL));
+    //srand(time(NULL));
     int moved = 0;
 
     while (moved == 0)
     {
         int moveDir = (rand() % (4)) + 1;
-        int curRow = this->getCurrentPosition().getRow();
-        int curCol = this->getCurrentPosition().getCol();
+        int curRow = this->current_position.getRow();
+        int curCol = this->current_position.getCol();
 
         switch (moveDir)
         {
@@ -103,9 +103,9 @@ void Fruit::move(Board& game_board, vector<Fruit>& other_array, int num_fruits, 
 
 void Fruit::reservePreviousItem(Board& game_board)
 {
-    this->prev_position = this->current_position; // save the current position so that we can go back to it
-    int prevRow = this->prev_position.getRow();
-    int prevCol = this->prev_position.getCol();
+    this->prev_pos = this->current_position; // save the current position so that we can go back to it
+    int prevRow = this->prev_pos.getRow();
+    int prevCol = this->prev_pos.getCol();
     char prev_item_on_board = game_board.getCellItem(prevRow, prevCol);
 
     // print the previous item that was on the board

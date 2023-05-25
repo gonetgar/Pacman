@@ -1,5 +1,4 @@
 // This class controls the current game played at the time.
-
 #ifndef GAME 
 #define GAME
 
@@ -33,15 +32,18 @@ public:
 	vector<Ghost>& getGhostsArray() { return ghostArray; }
 	vector<Fruit>& getFruitsArray() { return fruitArray; }
 
-	int startGame();
-	void gameCourse();
-	void handleCollision(char* pressed_key);
-	bool checkCollision();
-	void printScoreAndLife();
+	int startGame(int* total_score);
+	void gameCourse(int* total_score);
+	void handleCollision(int total_score, char* pressed_key);
+	bool checkCollisionPacmanAndGhost();
+	void checkFruitCollision(int* total_score);
+	void eatFruit(vector<Fruit>::iterator* it);
+	void printScoreAndLife(int total_score);
 	bool isValidKey(char key, char* last_movement);
 	bool isGameEnded();
 	void placeGhostsAtStartPosition();
 	void createGhosts();
+	void createFruits();
 	void placePacmanAtStartPosition();
 	
 	~Game()
