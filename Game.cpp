@@ -83,7 +83,7 @@ void Game::gameCourse(int* total_score)
 
 		if (!this->game_pause)
 		{
-			switch (this->level)
+			switch (this->level) /// Todo level int in game
 			{
 			case NOVICE: // Novice
 			{
@@ -94,6 +94,7 @@ void Game::gameCourse(int* total_score)
 						ghostArray[i].setLastDir(ghostArray[i].ghostMovement(this->board, ghostArray, num_of_ghosts));
 						if (checkCollisionPacmanAndGhost() == true)
 							handleCollision(*total_score, &pressed_key);
+						checkFruitCollision(total_score);
 					}
 				}
 				else  // take the previous movement
@@ -103,6 +104,7 @@ void Game::gameCourse(int* total_score)
 						ghostArray[i].moveNR(this->board, ghostArray, num_of_ghosts, ghostArray[i].getLastDir());   /// need also to add to ghosts int of last move, and check for colission if stays.
 						if (checkCollisionPacmanAndGhost() == true)
 							handleCollision(*total_score, &pressed_key);
+						checkFruitCollision(total_score);
 					}
 				}
 				break;
@@ -116,6 +118,7 @@ void Game::gameCourse(int* total_score)
 						ghostArray[i].setLastDir(ghostArray[i].ghostMovement(this->board, ghostArray, num_of_ghosts));
 						if (checkCollisionPacmanAndGhost() == true)
 							handleCollision(*total_score, &pressed_key);
+						checkFruitCollision(total_score);
 					}
 				}
 				else if ((turn % 20) >= 1 || (turn % 20) <= 5) // take the previous movement
@@ -125,6 +128,7 @@ void Game::gameCourse(int* total_score)
 						ghostArray[i].moveNR(this->board, ghostArray, num_of_ghosts, ghostArray[i].getLastDir());
 						if (checkCollisionPacmanAndGhost() == true)
 							handleCollision(*total_score, &pressed_key);
+						checkFruitCollision(total_score);
 					}
 				}
 				else
@@ -133,6 +137,7 @@ void Game::gameCourse(int* total_score)
 						ghostArray[i].moveBest(this->board, ghostArray, num_of_ghosts, player.getCurrentPosition());
 						if (checkCollisionPacmanAndGhost() == true)
 							handleCollision(*total_score, &pressed_key);
+						checkFruitCollision(total_score);
 					}
 				}
 				break;
@@ -144,6 +149,7 @@ void Game::gameCourse(int* total_score)
 					ghostArray[i].moveBest(this->board, ghostArray, num_of_ghosts, player.getCurrentPosition());
 					if (checkCollisionPacmanAndGhost() == true)
 						handleCollision(*total_score, &pressed_key);
+					checkFruitCollision(total_score);
 				}
 				break;
 			}
@@ -171,6 +177,7 @@ void Game::gameCourse(int* total_score)
 				printScoreAndLife(*total_score);
 			}
 
+			checkFruitCollision(total_score);
 			if (checkCollisionPacmanAndGhost() == true)
 			{
 				handleCollision(*total_score, &pressed_key);
@@ -222,9 +229,10 @@ bool Game::checkCollisionPacmanAndGhost()
 	return false;
 }
 
-
 void Game::checkFruitCollision(int* total_score)
 {
+	bool collision = false;
+
 	// pacman and fruit
 	for (vector<Fruit>::iterator it = fruitArray.begin(); it != fruitArray.end(); ++it)
 	{
@@ -243,10 +251,14 @@ void Game::checkFruitCollision(int* total_score)
 		{
 			if ((*it).getCurrentPosition() == (*itGhost).getCurrentPosition())
 			{
+				collision = true;
 				eatFruit(&it);
 				break;
 			}
 		}
+
+		if (collision)
+			break;
 	}
 }
 
@@ -319,6 +331,8 @@ void Game::createFruits()
 void Game::placePacmanAtStartPosition()
 {
 	player.setCurrentPosition(board.getPacmanPosition());
+
+	// todo -> check if necessary
 	gotoxy(player.getCurrentPosition().getCol(), player.getCurrentPosition().getRow());
 	cout << (char)PACMAN_PRINT;
 }

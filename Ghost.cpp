@@ -81,8 +81,14 @@ void Ghost::move(Board& game_board, vector<Ghost>& other_array, int num_ghosts, 
 	}
 }
 
-void Ghost::moveNR(Board& game_board, vector<Ghost>& other_array, int num_ghosts, int moveDir)
+
+
+//void Ghost::moveNR(Board& game_board, vector<Ghost>& other_array, int num_ghosts, int new_row, int new_col, int moveDir)   ///Novice level - no random
+void Ghost::moveNR(Board& game_board, vector<Ghost>& other_array, int num_ghosts, int moveDir)   ///Novice level - no random
 {
+	//int new_row = new_pos.getRow();
+	//int new_col = new_pos.getCol();
+
 	int moved = 0;
 	int curRow = this->current_position.getRow();
 	int curCol = this->current_position.getCol();
@@ -194,6 +200,11 @@ void Ghost::reservePreviousItem(Board& game_board)
 		gotoxy(prevCol, prevRow);
 		cout << (char)BREADCRUMB;
 	}
+	/*else if (prev_item_on_board == GHOST_WALL)
+	{
+		gotoxy(prevCol, prevRow);
+		cout << (char)GHOST_WALL;
+	}*/
 	else if (prev_item_on_board == EATEN || prev_item_on_board == EMPTY_CELL_BOARD) // todo- i changed here EMPTY_CELL. check it's ok
 	{
 		gotoxy(prevCol, prevRow);
