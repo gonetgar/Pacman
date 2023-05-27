@@ -21,7 +21,7 @@ public:
 
 	GameManager();  // c'tor
 
-	int getLivesManager() { return lives_manager; }
+	const int getLivesManager() const { return lives_manager; }
 	void setLivesManager(int new_life) { lives_manager = new_life; }
 
 	void printMenu();

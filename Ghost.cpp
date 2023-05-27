@@ -18,7 +18,7 @@ Ghost::Ghost(int row_, int col_)
 	this->last_dir = 0;
 }
 
-void Ghost::printGhost()
+void Ghost::printGhost() const
 {
 	gotoxy(this->current_position.getCol(), this->current_position.getRow());
 	cout << (char)GHOST_PRINT;
@@ -27,7 +27,6 @@ void Ghost::printGhost()
 // places the ghost at random place on the board
 int Ghost::ghostMovement(Board& game_board, vector<Ghost>& other_array, int num_ghosts)
 {
-	//srand(time(NULL));
 	int moved = 0, moveDir;
 
 	while (moved == 0)
@@ -56,7 +55,7 @@ int Ghost::ghostMovement(Board& game_board, vector<Ghost>& other_array, int num_
 	return moveDir;
 }
 
-void Ghost::move(Board& game_board, vector<Ghost>& other_array, int num_ghosts, int new_row, int new_col, int* moved)     /// the actual movement
+void Ghost::move(Board& game_board, vector<Ghost>& other_array, int num_ghosts, int new_row, int new_col, int* moved) // the actual movement
 {
 	Position new_pos(new_row, new_col);
 
@@ -81,14 +80,8 @@ void Ghost::move(Board& game_board, vector<Ghost>& other_array, int num_ghosts, 
 	}
 }
 
-
-
-//void Ghost::moveNR(Board& game_board, vector<Ghost>& other_array, int num_ghosts, int new_row, int new_col, int moveDir)   ///Novice level - no random
 void Ghost::moveNR(Board& game_board, vector<Ghost>& other_array, int num_ghosts, int moveDir)   ///Novice level - no random
 {
-	//int new_row = new_pos.getRow();
-	//int new_col = new_pos.getCol();
-
 	int moved = 0;
 	int curRow = this->current_position.getRow();
 	int curCol = this->current_position.getCol();
@@ -108,12 +101,12 @@ void Ghost::moveNR(Board& game_board, vector<Ghost>& other_array, int num_ghosts
 		break;
 	}
 
-	if (moved == 0)   //// maybe unacecary, but just to chack in case of collison if it stays, othewise send same c & r
+	if (moved == 0)
 		return;
 }
 
 // ghosts trying to chase the pacman
-void Ghost::moveBest(Board& game_board, vector<Ghost>& other_array, int num_ghosts, Position& pacPos)     /// for best - helper
+void Ghost::moveBest(Board& game_board, vector<Ghost>& other_array, int num_ghosts, const Position& pacPos)     /// for best - helper
 {
 	int curRow = this->current_position.getRow();
 	int curCol = this->current_position.getCol();
@@ -121,18 +114,21 @@ void Ghost::moveBest(Board& game_board, vector<Ghost>& other_array, int num_ghos
 	int pac_row = pacPos.getRow();
 	int pac_col = pacPos.getCol();
 
-	// Calculate distance between ghost and Pacman in each direction
+	// calculate distance between ghost and pacman in each direction
 	Distance distances[4];
-	distances[0].val = abs(curRow - pac_row - 1) + abs(curCol - pac_col); // Up
+	distances[0].val = abs(curRow - pac_row - 1) + abs(curCol - pac_col); // up
 	distances[0].direction = GHOST_UP;
-	distances[1].val = abs(curRow - pac_row + 1) + abs(curCol - pac_col); // Down
+
+	distances[1].val = abs(curRow - pac_row + 1) + abs(curCol - pac_col); // down
 	distances[1].direction = GHOST_DOWN;
-	distances[2].val = abs(curRow - pac_row) + abs(curCol - pac_col + 1); // Right
+
+	distances[2].val = abs(curRow - pac_row) + abs(curCol - pac_col + 1); // right
 	distances[2].direction = GHOST_RIGHT;
-	distances[3].val = abs(curRow - pac_row) + abs(curCol - pac_col - 1); // Left
+
+	distances[3].val = abs(curRow - pac_row) + abs(curCol - pac_col - 1); // left
 	distances[3].direction = GHOST_LEFT;
 
-	// sort array // TODO
+	// sort array
 	for (int i = 0; i < 4 - 1; i++)
 	{
 		for (int j = 0; j < 4 - i - 1; j++)
@@ -200,12 +196,7 @@ void Ghost::reservePreviousItem(Board& game_board)
 		gotoxy(prevCol, prevRow);
 		cout << (char)BREADCRUMB;
 	}
-	/*else if (prev_item_on_board == GHOST_WALL)
-	{
-		gotoxy(prevCol, prevRow);
-		cout << (char)GHOST_WALL;
-	}*/
-	else if (prev_item_on_board == EATEN || prev_item_on_board == EMPTY_CELL_BOARD) // todo- i changed here EMPTY_CELL. check it's ok
+	else if (prev_item_on_board == EATEN || prev_item_on_board == EMPTY_CELL_BOARD)
 	{
 		gotoxy(prevCol, prevRow);
 		cout << (char)EATEN;

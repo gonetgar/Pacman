@@ -15,11 +15,11 @@ class Pacman
 public:
 
 	Pacman();
-	int getScore() { return score; }
+	const int getScore() const { return score; }
 	void setScore(int new_score) { score = new_score; }
-	int getALife() { return lives; }
+	const int getALife() const { return lives; }
 	void setLife(int new_life) { lives = new_life; }
-	Position& getCurrentPosition() { return current_position; }
+	const Position& getCurrentPosition() const { return current_position; }
 	void setCurrentPosition(const Position& new_pos) { current_position = new_pos; }
 
 	void pacmanMovement(Board& game_board, char pressed_key);

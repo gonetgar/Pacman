@@ -133,7 +133,8 @@ void Game::gameCourse(int* total_score)
 				}
 				else
 				{
-					for (int i = 0; i < num_of_ghosts; i++) {
+					for (int i = 0; i < num_of_ghosts; i++)
+					{
 						ghostArray[i].moveBest(this->board, ghostArray, num_of_ghosts, player.getCurrentPosition());
 						if (checkCollisionPacmanAndGhost() == true)
 							handleCollision(*total_score, &pressed_key);
@@ -289,7 +290,7 @@ bool Game::isValidKey(char key, char* last_movement)
 	return false;
 }
 
-bool Game::isGameEnded()
+bool Game::isGameEnded() const
 {
 	if (player.getALife() == 0 || player.getScore() == this->total_breadcrumbs)
 		return true;

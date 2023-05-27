@@ -25,12 +25,12 @@ class Game
 public:
 
 	Game(ifstream& board_file, int chosen_level, int current_lives);
-	int getNumOfBreadcrumbs() { return total_breadcrumbs; }
-	int getNumOfGhosts() { return num_of_ghosts; }
-	int getNumOfFruits() { return num_of_fruits; }
-	int getLevel() { return level; }
-	vector<Ghost>& getGhostsArray() { return ghostArray; }
-	vector<Fruit>& getFruitsArray() { return fruitArray; }
+	const int getNumOfBreadcrumbs() const { return total_breadcrumbs; }
+	const int getNumOfGhosts() const { return num_of_ghosts; }
+	const int getNumOfFruits() const { return num_of_fruits; }
+	const int getLevel() const { return level; }
+	const vector<Ghost>& getGhostsArray() const { return ghostArray; }
+	const vector<Fruit>& getFruitsArray() const { return fruitArray; }
 
 	int startGame(int* total_score);
 	void gameCourse(int* total_score);
@@ -40,7 +40,7 @@ public:
 	void eatFruit(vector<Fruit>::iterator* it);
 	void printScoreAndLife(int total_score);
 	bool isValidKey(char key, char* last_movement);
-	bool isGameEnded();
+	bool isGameEnded() const;
 	void placeGhostsAtStartPosition();
 	void createGhosts();
 	void createFruits();

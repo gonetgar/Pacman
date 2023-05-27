@@ -22,7 +22,7 @@ Fruit::Fruit(Board& game_board)      // default c'tor
 }
 
 
-void Fruit::printFruit()   /// print fruit
+void Fruit::printFruit() const  /// print fruit
 {
     gotoxy(this->current_position.getCol(), this->current_position.getRow());
     switch (this->val)

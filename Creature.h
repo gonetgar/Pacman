@@ -14,10 +14,10 @@ protected:
 public:
 	Creature() {}
 
-	Position& getCurrentPosition() { return current_position; }
+	const Position& getCurrentPosition() const  { return current_position; }
 	void setCurrentPosition(int row, int col) { current_position.setRow(row); current_position.setCol(col); }
 	void setCurrentPosition(Position new_pos) { current_position = new_pos; }
-	Position& getPrevPosition() { return prev_pos; }
+	const Position& getPrevPosition() const { return prev_pos; }
 	void setPrevPosition(int row, int col) { prev_pos.setRow(row); prev_pos.setCol(col); }
 };
 

@@ -1,4 +1,10 @@
 ﻿  Game.cpp
 C:\Users\gonet\source\repos\Pacman2\Game.cpp(27,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\gonet\source\repos\Pacman2\Game.cpp(58,51): warning C4390: ';': empty controlled statement found; is this the intent?
+  GameManager.cpp
+  Ghost.cpp
+  main.cpp
+C:\Users\gonet\source\repos\Pacman2\main.cpp(13,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+C:\Users\gonet\source\repos\Pacman2\Ghost.cpp(182): warning C4172: returning address of local variable or temporary: next_pos
   Pacman2.vcxproj -> C:\Users\gonet\source\repos\Pacman2\Debug\Pacman2.exe

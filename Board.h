@@ -18,10 +18,10 @@ class Board
 public:
 	Board() {}
 	void createBoard(ifstream& board_file);
-	char getCellItem(int row, int col) { return board[row][col]; }
+	const char getCellItem(int row, int col) const { return board[row][col]; }
 	void setCellItem(int row, int col, char item) { board[row][col] = item; }
-	const Position& getPacmanPosition() { return pacmanPosition; }
-	vector<Position>& getghostsPositions() { return ghostsPositions; }
+	const Position& getPacmanPosition() const { return pacmanPosition; }
+	const vector<Position>& getghostsPositions() const { return ghostsPositions; }
 	void setPacmanPosition(Position& new_pos) { pacmanPosition = new_pos; }
 	void printBoardAndSaveCreaturesPositions(int* total_breadcrumbs);
 };
